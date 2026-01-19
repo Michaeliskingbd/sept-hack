@@ -3,24 +3,29 @@ import charity from "../assets/charity picture.jpg";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
+import Navbar1 from "./Navbar1";
 
 const Contact = () => {
   return (
     <div className="sm:items-center">
-      <div className="relative  px-0.5 py-0.5 sm:">
-        <img
-          src={charity}
-          alt="charity"
-          className="h-screen w-full object-cover"
-        />
-
-        <div className="bg-black/50 absolute inset-0"></div>
-      </div>
-
-      <div className="absolute inset-0 flex sm:">
-        <h1 className="text-white sm:text-6xl md:text-7xl font-bold mt-64 ml-7">
-          Contact
-        </h1>
+      <div className="font-sans text-gray-900">
+        {/* Subzero Section */}
+        <header className="relative h-[600px] w-full overflow-hidden">
+          {/* Background Image  */}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${charity})` }}
+          >
+            <div className="absolute inset-0 bg-black/30"></div>
+          </div>
+          <Navbar1 />
+          {/* Hero Text */}
+          <div className="relative z-10 flex items-center h-full px-10">
+            <h1 className="text-white text-7xl md:text-8xl font-black">
+              Contact
+            </h1>
+          </div>
+        </header>
       </div>
 
       <div className=" lg:grid-cols-2 grid grid-cols-1 gap-14 px-8 sm:">

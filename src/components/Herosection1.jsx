@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Navbar1 from "./Navbar1";
 
 const Herosection1 = () => {
   return (
@@ -9,34 +11,10 @@ const Herosection1 = () => {
           "url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1920&q=80')",
       }}
     >
-    
       <div className="absolute inset-0 bg-black/60" />
 
-      
-      <nav className="relative flex items-center justify-between px-20 py-6 text-white">
-        
-        <div className="flex items-center gap-2 text-xl font-bold ">
-          <span className="">❤</span>
-          GOODWILL
-        </div>
+      <Navbar1 />
 
-        
-        <div className="flex items-center justify-between">
-        <ul className="hidden md:flex gap-8 text-md font-medium">
-          <li className="hover:text-pink-400 cursor-pointer">Home</li>
-          <li className="hover:text-pink-400 cursor-pointer">About</li>
-          <li className="hover:text-pink-400 cursor-pointer">What we do</li>
-          <li className="hover:text-pink-400 cursor-pointer">Contact</li>
-        </ul>
-
-        
-        <button className="border border-white px-8 py-4 text-sm text-[#833556] font-semibold bg-white hover:bg-white hover:text-black">
-          DONATE
-        </button>
-        </div>
-      </nav>
-
-      
       <div className="relative flex items-center px-20">
         <div className="max-w-5xl text-white">
           <p className="mt-10 mb-4 text-xl font-extrabold">Together, we can</p>

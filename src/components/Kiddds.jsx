@@ -1,6 +1,6 @@
-import React from 'react';
-import logo from '../assets/charity.png'; 
-import lexus from '../assets/gazakids.avif';
+import lexus from "../assets/gazakids.avif";
+
+import Navbar1 from "./Navbar1";
 
 const Kiddds = () => {
   return (
@@ -8,15 +8,13 @@ const Kiddds = () => {
       {/* Subzero Section */}
       <header className="relative h-[600px] w-full overflow-hidden">
         {/* Background Image  */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${lexus})` }}
         >
           <div className="absolute inset-0 bg-black/30"></div>
         </div>
-
-    
-
+        <Navbar1 />
         {/* Hero Text */}
         <div className="relative z-10 flex items-center h-full px-10">
           <h1 className="text-white text-7xl md:text-8xl font-black">
@@ -24,10 +22,8 @@ const Kiddds = () => {
           </h1>
         </div>
       </header>
-
-    
     </div>
   );
 };
 
-export default Kiddds ;
+export default Kiddds;

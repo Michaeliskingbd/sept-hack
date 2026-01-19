@@ -1,17 +1,27 @@
-import pic from"../assets/people.jpg"
+import pic from "../assets/people.jpg";
+import Navbar1 from "./Navbar1";
 const About = () => {
   return (
-    <div>
-      <section>
-        <div className=" relative">
-            <img className="w-screen h-[600px] brightness-75"  src={pic} alt="" />
-            </div>
-            <span className="absolute lg:top-[50%] top-60 lg:mx-16 mx-28 h-10 ">
-                <h2 className=" text-white   text-7xl font-bold ">About us</h2>
-            </span>
-    </section>
+    <div className="font-sans text-gray-900">
+      {/* Subzero Section */}
+      <header className="relative h-[600px] w-full overflow-hidden">
+        {/* Background Image  */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${pic})` }}
+        >
+          <div className="absolute inset-0 bg-black/30"></div>
+        </div>
+        <Navbar1 />
+        {/* Hero Text */}
+        <div className="relative z-10 flex items-center h-full px-10">
+          <h1 className="text-white text-7xl md:text-8xl font-black">
+            About Us
+          </h1>
+        </div>
+      </header>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;
