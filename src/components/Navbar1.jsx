@@ -23,18 +23,18 @@ const Navbar1 = () => {
               {" "}
               <li className="hover:text-pink-400 cursor-pointer">Home</li>
             </Link>
-            <Link to="about">
+            <Link to="/about">
               <li className="hover:text-pink-400 cursor-pointer">About</li>
             </Link>
-            <Link to="what-we-do">
+            <Link to="/what-we-do">
               {" "}
               <li className="hover:text-pink-400 cursor-pointer">What we do</li>
             </Link>
-            <Link to="contact">
+            <Link to="/contact">
               <li className="hover:text-pink-400 cursor-pointer">Contact</li>
             </Link>
           </ul>
-          <Link to="donate">
+          <Link to="/donate">
             <button className="border border-white px-8 py-4 text-sm text-[#833556] font-semibold bg-white hover:bg-white hover:text-black transition">
               DONATE
             </button>

@@ -10,7 +10,7 @@ const Addrex = () => {
           <div className="  font-extralight grid">
             <h1 className="lg:text-2xl text-xl ">Address</h1>
             <span className=" ">
-              <p>A: 123 Fifth Avenue, New York, NY 10160</p>
+              <p>N0.16 Soun ajagungbade, Bodija, Ibadan, Nigeria</p>
               <p>P: 929-242-6868</p>
               <a href="">E: contact@info.com</a>
             </span>

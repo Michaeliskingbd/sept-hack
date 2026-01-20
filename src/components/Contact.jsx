@@ -4,6 +4,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import Navbar1 from "./Navbar1";
+import Addrex from "./Addrex";
 
 const Contact = () => {
   return (
@@ -14,7 +15,9 @@ const Contact = () => {
           {/* Background Image  */}
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${charity})` }}
+            style={{
+              backgroundImage: `url("https://images.unsplash.com/photo-1569420626546-55b02c8376b1?q=80&w=868&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
+            }}
           >
             <div className="absolute inset-0 bg-black/30"></div>
           </div>
@@ -84,12 +87,13 @@ const Contact = () => {
               ></textarea>
             </form>
 
-            <button className="bg-slate-100 text-rose-900  px-4 py-2 cursor-pointer:black mt-8 hover:text-black font-semibold">
+            <button className="bg-slate-100 mb-10 text-rose-900  px-4 py-2 cursor-pointer:black mt-8 hover:text-black font-semibold">
               Submit
             </button>
           </form>
         </div>
       </div>
+      <Addrex />
     </div>
   );
 };

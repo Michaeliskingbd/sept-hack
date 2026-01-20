@@ -1,85 +1,292 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ahhkids from "../assets/gzaaa.avif";
-import logo from "../assets/charity.png";
+
+import { Link } from "react-router-dom";
+import Addrex from "../components/Addrex";
+
 const Gofundme = () => {
+  const [amount, setAmount] = useState("");
+  const [raised, setRaised] = useState(53643);
+
+  const goal = 200000;
+  const progress = Math.min((raised / goal) * 100, 100);
+
+  const payWithPaystack = () => {
+    if (!amount) return;
+
+    const handler = window.PaystackPop.setup({
+      key: "pk_test_064d1ab7c7420892a19045c5b4caf8d26ed5c5ab",
+      email: "donor@email.com",
+      amount: Number(amount) * 100,
+      currency: "NGN",
+      ref: "DON_" + Date.now(),
+
+      callback: function (response) {
+        setRaised((prev) => prev + Number(amount));
+        setAmount("");
+
+        alert("Thank you for donating");
+      },
+
+      onClose: function () {
+        alert("Payment cancelled");
+      },
+    });
+
+    handler.openIframe();
+  };
+
   return (
-    <div className="container mx-auto p-4 md:p-8 bg-gray-50">
-      <header className="relative bg-blue-600 p-4 rounded-t-lg">
-        <h1 className="text-3xl font-light text-white">
-          <img src={logo} alt="Logo" className="rounded-lg" /> fundraiser
-        </h1>
-      </header>
-      <div className="main-content flex flex-col md:flex-row gap-8 p-4">
-        {/* Left Side: Image and Story */}
-        <section className="left-panel w-full md:w-1/2">
-          <img
-            src={ahhkids}
-            alt="Smiling child"
-            className="w-full h-auto object-cover rounded-lg"
-          />
-          <div className="organizer-info mt-4">
-            <p>
-              <strong>Appclick September 2025 cohort</strong> are the organizers
-              of this fundraiser.
-            </p>
-          </div>
-          <hr className="my-4" />
-          <p className="story-text">
-            {" "}
-            Help orphans from all around the world get a better life!
-            <br />
-            Your donation will provide food that are either grown or bought,
-            shelter in our foster homes, education from qualified teachers from
-            our schools, and medical care from hired practitioners to children
-            in need. Our goal is to raise $200,000 to support these vulnerable
-            children who are victims of war, and give them a chance at a
-            brighter future. Every contribution, big or small, makes a
-            difference in their lives. Join us in making a positive impact and
-            giving these children hope for a brighter future.
-          </p>
-        </section>
-        {/* Right Side: Donation Panel */}
-        <aside className="right-panel w-full md:w-1/2">
-          <div className="stats-box bg-white p-4 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-green-600">
-              $53,643{" "}
-              <span className="goal-text text-sm text-gray-500">
-                raised of $200,000 goal
-              </span>
+    <div className="mx-auto p-4 md:p-0 bg-gray-50">
+      <nav className="relative flex items-center justify-between px-10 py-6 text-white bg-black">
+        <div className="flex items-center gap-2 text-xl font-bold">
+          <span className="">❤</span>
+          GOODWILL
+        </div>
+
+        <div className="flex items-center  justify-between gap-5">
+          <ul className="hidden md:flex gap-8 text-sm font-medium">
+            <Link to="/">
+              {" "}
+              <li className="hover:text-pink-400 cursor-pointer">Home</li>
+            </Link>
+            <Link to="/about">
+              <li className="hover:text-pink-400 cursor-pointer">About</li>
+            </Link>
+            <Link to="/what-we-do">
+              {" "}
+              <li className="hover:text-pink-400 cursor-pointer">What we do</li>
+            </Link>
+            <Link to="/contact">
+              <li className="hover:text-pink-400 cursor-pointer">Contact</li>
+            </Link>
+          </ul>
+          {/* <Link to="donate">
+            <button className="border border-white px-8 py-4 text-sm text-[#833556] font-semibold bg-white hover:bg-white hover:text-black transition">
+              DONATE
+            </button>
+          </Link> */}
+        </div>
+      </nav>
+
+      <section className="px-8 mb-10">
+        <div className="grid md:grid-cols-2 gap-10 mt-8">
+          {/* LEFT */}
+          <section>
+            <img
+              src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=731&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="children"
+              className="rounded-xl w-full object-cover"
+            />
+
+            <div className="mt-4 text-gray-700">
+              {/* <p className="font-semibold">Appclick September 2025 Cohort</p> */}
+              <p className="mt-3 leading-relaxed">
+                Help orphans from all around the world get a better life. Your
+                donation supports food, shelter, education, and healthcare for
+                vulnerable children affected by conflict and poverty.
+              </p>
+            </div>
+          </section>
+
+          <aside className="bg-white rounded-xl shadow-lg p-6">
+            <h2 className="text-3xl font-bold text-black">
+              ₦{raised.toLocaleString()}
             </h2>
-            <div className="progress-bar-bg bg-gray-200 h-2 w-full rounded-full mt-2">
+            <p className="text-gray-500 mb-3">
+              raised of ₦{goal.toLocaleString()} goal
+            </p>
+
+            <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
               <div
-                className="progress-bar-fill bg-green-600 h-2 rounded-full"
-                style={{ width: "27%" }}
-              ></div>
+                className="bg-black h-full transition-all duration-700"
+                style={{ width: `${progress}%` }}
+              />
             </div>
 
-            <div className="stats-row flex justify-between mt-2">
-              <span>
-                <strong>441</strong> donors
-              </span>
-              <span>
-                <strong>2.8K</strong> shares
-              </span>
+            {/* AMOUNT INPUT */}
+            <div className="mt-6">
+              <label className="block text-sm mb-1 font-medium">
+                Donation amount (₦)
+              </label>
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="Enter amount"
+                className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+              />
             </div>
-            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full w-full mt-4">
-              Donate now
+
+            <button
+              onClick={payWithPaystack}
+              disabled={!amount}
+              className="mt-5 bg-[#7b344f]  disabled:opacity-50 text-white w-full py-3 rounded-full font-semibold transition"
+            >
+              Donate with Paystack ❤️
             </button>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full mt-2">
-              Share
-            </button>
-          </div>
-          <div className=" mt-4">
-            {/* Map through your donor data here */}
-            <div className="donor-item flex items-center gap-2">
-              <div className=" bg-gray-200 p-2 rounded-full">👤</div>
-              <div>
-                <strong>Anonymous</strong> donated $50
-              </div>
+          </aside>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-10 mt-8">
+          <section>
+            <img
+              src={ahhkids}
+              alt="children"
+              className="rounded-xl w-full object-cover"
+            />
+
+            <div className="mt-4 text-gray-700">
+              {/* <p className="font-semibold">Appclick September 2025 Cohort</p> */}
+              <p className="mt-3 leading-relaxed">
+                Help children and families affected by war rebuild their lives.
+                Your donation provides food, safe shelter, medical care, and
+                access to education for innocent victims displaced by conflict
+                and violence.
+              </p>
             </div>
-          </div>
-        </aside>
-      </div>
+          </section>
+
+          <aside className="bg-white rounded-xl shadow-lg p-6">
+            <h2 className="text-3xl font-bold text-black">₦230,450</h2>
+            <p className="text-gray-500 mb-3">raised of ₦700,000 goal</p>
+
+            <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+              <div
+                className="bg-black h-full transition-all duration-700"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            <div className="mt-6">
+              <label className="block text-sm mb-1 font-medium">
+                Donation amount (₦)
+              </label>
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="Enter amount"
+                className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+            </div>
+
+            <button
+              onClick={payWithPaystack}
+              disabled={!amount}
+              className="mt-5 bg-[#7b344f]  disabled:opacity-50 text-white w-full py-3 rounded-full font-semibold transition"
+            >
+              Donate with Paystack ❤️
+            </button>
+          </aside>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-10 mt-8">
+          {/* LEFT */}
+          <section>
+            <img
+              src="https://images.unsplash.com/photo-1694286068611-d0c24cbc2cd5?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="children"
+              className="rounded-xl w-full object-cover"
+            />
+
+            <div className="mt-4 text-gray-700">
+              {/* <p className="font-semibold">Appclick September 2025 Cohort</p> */}
+              <p className="mt-3 leading-relaxed">
+                Help orphans from all around the world get a better life. Your
+                donation supports food, shelter, education, and healthcare for
+                vulnerable children affected by conflict and poverty.
+              </p>
+            </div>
+          </section>
+
+          <aside className="bg-white rounded-xl shadow-lg p-6">
+            <h2 className="text-3xl font-bold text-black">₦75,540</h2>
+            <p className="text-gray-500 mb-3">raised of ₦345,000 goal</p>
+
+            <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+              <div
+                className="bg-black h-full transition-all duration-700"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            <div className="mt-6">
+              <label className="block text-sm mb-1 font-medium">
+                Donation amount (₦)
+              </label>
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="Enter amount"
+                className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+            </div>
+
+            <button
+              onClick={payWithPaystack}
+              disabled={!amount}
+              className="mt-5 bg-[#7b344f]  disabled:opacity-50 text-white w-full py-3 rounded-full font-semibold transition"
+            >
+              Donate with Paystack ❤️
+            </button>
+          </aside>
+        </div>
+        <div className="grid md:grid-cols-2 gap-10 mt-8">
+          <section>
+            <img
+              src="https://images.unsplash.com/photo-1473649085228-583485e6e4d7?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="children"
+              className="rounded-xl w-full object-cover"
+            />
+
+            <div className="mt-4 text-gray-700">
+              {/* <p className="font-semibold">Appclick September 2025 Cohort</p> */}
+              <p className="mt-3 leading-relaxed">
+                Help children gain access to quality education and a brighter
+                future. Your donation supports school fees, learning materials,
+                uniforms, and a safe learning environment for vulnerable
+                children affected by poverty and hardship.
+              </p>
+            </div>
+          </section>
+
+          <aside className="bg-white rounded-xl shadow-lg p-6">
+            <h2 className="text-3xl font-bold text-black">₦150,500</h2>
+            <p className="text-gray-500 mb-3">raised of ₦800,000 goal</p>
+
+            <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+              <div
+                className="bg-black h-full transition-all duration-700"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            <div className="mt-6">
+              <label className="block text-sm mb-1 font-medium">
+                Donation amount (₦)
+              </label>
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="Enter amount"
+                className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+            </div>
+
+            <button
+              onClick={payWithPaystack}
+              disabled={!amount}
+              className="mt-5 bg-[#7b344f]  disabled:opacity-50 text-white w-full py-3 rounded-full font-semibold transition"
+            >
+              Donate with Paystack ❤️
+            </button>
+          </aside>
+        </div>
+      </section>
+      <Addrex />
     </div>
   );
 };
